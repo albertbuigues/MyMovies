@@ -1,7 +1,6 @@
 package com.buigues.ortola.mymovies
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +11,6 @@ import com.buigues.ortola.mymovies.model.MovieDbClient
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
-    companion object{
-        const val EXTRA_MOVIE = "MovieDetailActivity:movie"
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Inicializamos un objeto MoviesAdapter con una lista vacia y lo vinculamos a la view de la UI
-        val moviesAdapter = MoviesAdapter(emptyList()){ movie -> navigateTo(movie) }
+        val moviesAdapter = MoviesAdapter(emptyList()){
+            Toast.makeText(this@MainActivity, "Clicked", Toast.LENGTH_SHORT).show()
+        }
         binding.moviesRecycler.adapter = moviesAdapter
 
         thread {
@@ -39,11 +36,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun navigateTo(movie: Movie) {
-        val intent = Intent(this, MovieDetailActivity::class.java)
-        intent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie)
-        startActivity(intent)
     }
 }
