@@ -2,6 +2,7 @@ package com.buigues.ortola.mymovies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.widget.TextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
@@ -11,6 +12,7 @@ import com.buigues.ortola.mymovies.model.Movie
 import com.bumptech.glide.Glide
 
 class MovieDetailActivity : AppCompatActivity() {
+
     companion object{
         const val EXTRA_MOVIE = "MovieDetailActivity:movie"
     }
@@ -33,10 +35,14 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun bindDetailInfo(movieDetailInfo: TextView, movie: Movie) {
         movieDetailInfo.text = buildSpannedString {
-            bold { append("Original Language: ") }
-            appendLine(movie.original_language)
+            appendInformation(this, R.string.original_language, movie.original_language)
+            appendInformation(this, R.string.original_title, movie.title)
+            appendInformation(this, R.string.release_date, movie.release_date)
+            appendInformation(this, R.string.popularity, movie.popularity.toString())
+            appendInformation(this, R.string.vote_average, movie.vote_average.toString())
 
-            bold { append("Original Title: ") }
+
+            /*bold { append("Original Title: ") }
             appendLine(movie.original_title)
 
             bold { append("Release Date: ") }
@@ -46,7 +52,15 @@ class MovieDetailActivity : AppCompatActivity() {
             appendLine(movie.popularity.toString())
 
             bold { append("Vote Average: ") }
-            appendLine(movie.vote_average.toString())
+            appendLine(movie.vote_average.toString())*/
         }
+    }
+
+    private fun appendInformation(builder: SpannableStringBuilder, stringReference:Int, value:String){
+        builder.bold {
+            append(getString(stringReference))
+            append(": ")
+        }
+        builder.appendLine(value)
     }
 }

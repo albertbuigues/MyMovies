@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#CEFFFA"
+    android:padding="3dp">
 
     <ImageView
         android:id="@+id/movie_cover"
@@ -19,6 +21,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
+        android:lines="1"
+        android:ellipsize="end"
         android:text="TextView"
+        android:textColor="#1D2993"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 </LinearLayout>
