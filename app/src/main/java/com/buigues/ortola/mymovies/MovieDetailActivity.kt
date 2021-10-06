@@ -3,7 +3,9 @@ package com.buigues.ortola.mymovies
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import com.buigues.ortola.mymovies.databinding.ActivityMainBinding
@@ -21,6 +23,9 @@ class MovieDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
         if (movie != null){
